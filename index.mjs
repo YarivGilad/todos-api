@@ -8,7 +8,7 @@ import taskRouter from './modules/task/task.router.mjs'
 
 
 //environment variables
-const {PORT, HOST, DB_URI_LOCAL, DB_URI_REMOTE, NODE_ENV} = process.env;
+const {PORT, DB_URI_LOCAL, DB_URI_REMOTE, NODE_ENV} = process.env;
 
 //set a different db uri per environment 
 const DB_URI = NODE_ENV === 'production' ? DB_URI_REMOTE : DB_URI_LOCAL;
@@ -35,7 +35,7 @@ app.use('*',(req,res)=> {
 })
 
 //make the app listen on port...
-// app.listen(PORT,HOST, ()=> {
+// app.listen(PORT, ()=> {
 //     connectDB(DB_URI);
 //     log.magenta(`listening on`,` ✨ ⚡  http://${HOST}:${PORT} ✨ ⚡`); 
 // }) 
@@ -43,7 +43,7 @@ app.use('*',(req,res)=> {
 
 ;(async ()=> {
     await connectDB(DB_URI);
-    await app.listen(PORT,HOST);
-    log.magenta(`listening on`,` ✨ ⚡  http://${HOST}:${PORT} ✨ ⚡`); 
+    await app.listen(PORT);
+    log.magenta(`listening on port`,` ✨ ⚡ ${PORT} ✨ ⚡`); 
     log.yellow('--------------------------------->')
 })()
